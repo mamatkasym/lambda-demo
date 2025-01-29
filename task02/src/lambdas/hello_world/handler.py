@@ -17,9 +17,12 @@ class HelloWorld(AbstractLambda):
         """
         _LOG.info(event)
         _LOG.info(context)
-        request_path = event.get('rawPath')
+        request_context = event.get("requestContext", {})
+        request = request_context.get("http", {})
+        method = request.get("method")
+        path = request.get("path")
 
-        if request_path == '/hello':
+        if path == '/hello' and method == "GET":
             return {
                 "statusCode": 200,
                 "headers": {
@@ -38,7 +41,7 @@ class HelloWorld(AbstractLambda):
                 },
                 "body": json.dumps({
                     "statusCode": 400,
-                    "message": "Bad request syntax or unsupported method. Request path: {path}. HTTP method: {method}"
+                    "message": f"Bad request syntax or unsupported method. Request path: {path}. HTTP method: {method}"
                 })
             }
 
