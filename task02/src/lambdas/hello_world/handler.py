@@ -15,17 +15,32 @@ class HelloWorld(AbstractLambda):
         """
         Explain incoming event here
         """
-        # todo implement business logic
-        return {
-            "statusCode": 200,
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "body": json.dumps({
+        _LOG.info(event)
+        _LOG.info(context)
+        request_path = event.get('rawPath')
+
+        if request_path == '/hello':
+            return {
                 "statusCode": 200,
-                "message": "Hello from Lambda"
-            })
-        }
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": json.dumps({
+                    "statusCode": 200,
+                    "message": "Hello from Lambda"
+                })
+            }
+        else:
+            return {
+                "statusCode": 400,
+                "headers": {
+                    "Content-Type": "application/json"
+                },
+                "body": json.dumps({
+                    "statusCode": 400,
+                    "message": "Bad request syntax or unsupported method. Request path: {path}. HTTP method: {method}"
+                })
+            }
 
 
 HANDLER = HelloWorld()
