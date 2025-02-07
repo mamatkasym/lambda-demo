@@ -17,15 +17,9 @@ class HelloWorld(AbstractLambda):
         """
         # todo implement business logic
         return {
-            "statusCode": 200,
-            "headers": {
-                "Content-Type": "application/json"
-            },
-            "body": json.dumps({
                 "statusCode": 200,
                 "message": "Hello from Lambda"
-            })
-        }
+            }
     
 
 HANDLER = HelloWorld()
