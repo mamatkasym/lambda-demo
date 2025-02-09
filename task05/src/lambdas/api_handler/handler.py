@@ -21,6 +21,10 @@ class ApiHandler(AbstractLambda):
         """
         # todo implement business logic
         _LOG.info(f"EVENT: {event}")
+        _LOG.info(f"ENVS: {os.environ.keys()}")
+        for key in os.environ.keys():
+            _LOG.info(f"{key}: {os.environ[key]}")
+
         principal_id = event.get("principalId")
         content = event.get("content")
 
@@ -31,16 +35,16 @@ class ApiHandler(AbstractLambda):
             "body": content
         }
 
-        dynamodb = boto3.resource('dynamodb', region_name="eu-central-1")
-        table_name = "cmtr-f88924dc-Events"
+        dynamodb = boto3.resource('dynamodb', region_name=os.environ["region"])
+        table_name = os.environ["table_name"]
 
         table = dynamodb.Table(table_name)
 
-        response = table.put_item(Item=obj)
+        table.put_item(Item=obj)
 
         return {
             "statusCode": 201,
-            "event": json.dumps(response, indent=4)
+            "event": json.dumps(obj, indent=4)
         }
 
 
