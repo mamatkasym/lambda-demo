@@ -35,9 +35,9 @@ class ApiHandler(AbstractLambda):
             "body": content
         }
 
-        dynamodb = boto3.resource('dynamodb', region_name=os.environ["region"])
-        table_name = os.environ["table_name"]
-
+        dynamodb = boto3.resource('dynamodb', region_name=os.environ.get("region", "eu-central-1"))
+        table_name = [table.name for table in list(dynamodb.tables.all()) if "Events" in table.name][0]
+        _LOG.info(f"Table: {table_name}")
         table = dynamodb.Table(table_name)
 
         table.put_item(Item=obj)
