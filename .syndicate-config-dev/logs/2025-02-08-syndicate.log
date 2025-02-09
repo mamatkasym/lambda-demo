@@ -1,0 +1,42 @@
+2025-02-08 17:04:28,416 [INFO] USER:mamatkasym_mamarasul handlers.py:106:syndicate LOG: Configuration used: C:\Users\mamatkasym_mamarasul\deep-dive-into-serverless\lambda-demo\.syndicate-config-dev
+2025-02-08 17:04:28,417 [ERROR] USER:mamatkasym_mamarasul decorators.py:136:wrapper LOG: sdct.conf does not exist inside C:\Users\mamatkasym_mamarasul\deep-dive-into-serverless\lambda-demo\.syndicate-config-dev folder
+2025-02-08 17:04:28,418 [ERROR] USER:mamatkasym_mamarasul decorators.py:137:wrapper LOG: Traceback (most recent call last):
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\decorators.py", line 134, in wrapper
+    return_code = func(*args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\handlers.py", line 107, in syndicate
+    initialize_connection()
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\__init__.py", line 106, in initialize_connection
+    CONFIG = ConfigHolder(CONF_PATH)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\conf\processor.py", line 63, in __init__
+    self._init_conf_config(dir_path=dir_path)
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\conf\processor.py", line 92, in _init_conf_config
+    raise AssertionError(
+AssertionError: sdct.conf does not exist inside C:\Users\mamatkasym_mamarasul\deep-dive-into-serverless\lambda-demo\.syndicate-config-dev folder
+Traceback (most recent call last):
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\decorators.py", line 134, in wrapper
+    return_code = func(*args, **kwargs)
+                  ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\handlers.py", line 107, in syndicate
+    initialize_connection()
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\__init__.py", line 106, in initialize_connection
+    CONFIG = ConfigHolder(CONF_PATH)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\conf\processor.py", line 63, in __init__
+    self._init_conf_config(dir_path=dir_path)
+  File "C:\Users\mamatkasym_mamarasul\AppData\Local\Programs\Python\Python312\Lib\site-packages\syndicate\core\conf\processor.py", line 92, in _init_conf_config
+    raise AssertionError(
+AssertionError: sdct.conf does not exist inside C:\Users\mamatkasym_mamarasul\deep-dive-into-serverless\lambda-demo\.syndicate-config-dev folder
+2025-02-08 17:06:56,500 [INFO] USER:mamatkasym_mamarasul s3_resource.py:40:validate_bucket_name LOG: Starting validating bucket name 'syndicate-education-platform-custom-sandbox-artifacts-sbox02'
+2025-02-08 17:06:56,500 [INFO] USER:mamatkasym_mamarasul s3_resource.py:73:validate_bucket_name LOG: Finished validating bucket name 'syndicate-education-platform-custom-sandbox-artifacts-sbox02'
+2025-02-08 17:06:56,500 [INFO] USER:mamatkasym_mamarasul helper.py:525:convert LOG: Stripping course_id:SEP_GL_7,course_type:stm,student_id:f88924dc,type:student from "," a bit..
+2025-02-08 17:06:56,500 [INFO] USER:mamatkasym_mamarasul helper.py:529:convert LOG: Converting: course_id:SEP_GL_7,course_type:stm,student_id:f88924dc,type:student to dict..
+2025-02-08 17:06:56,500 [INFO] USER:mamatkasym_mamarasul helper.py:541:convert LOG: Converted to such a dict: {'course_id': 'SEP_GL_7', 'course_type': 'stm', 'student_id': 'f88924dc', 'type': 'student'}
+2025-02-08 17:06:58,096 [WARNING] USER:mamatkasym_mamarasul generator.py:76:generate_configuration_files LOG: The config_path property is not specified. The working directory is used
+2025-02-08 17:06:58,096 [WARNING] USER:mamatkasym_mamarasul generator.py:93:generate_configuration_files LOG: The "project_path" property is not specified. The working directory will be used as a project path. To change the path, edit the syndicate.yml by path C:\Users\mamatkasym_mamarasul\deep-dive-into-serverless\lambda-demo\task04\.syndicate-config-dev
+2025-02-08 17:06:58,103 [INFO] USER:mamatkasym_mamarasul generator.py:155:generate_configuration_files LOG: Syndicate initialization has been completed. 
+Set SDCT_CONF:
+Unix: export SDCT_CONF="C:\Users\mamatkasym_mamarasul\deep-dive-into-serverless\lambda-demo\task04\.syndicate-config-dev"
+Windows: setx SDCT_CONF C:\Users\mamatkasym_mamarasul\deep-dive-into-serverless\lambda-demo\task04\.syndicate-config-dev
+2025-02-08 17:06:58,105 [INFO] USER:mamatkasym_mamarasul helper.py:330:timed LOG: Stage config, elapsed time: 0:00:01.604986
