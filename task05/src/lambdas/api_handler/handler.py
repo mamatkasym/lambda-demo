@@ -46,7 +46,7 @@ class ApiHandler(AbstractLambda):
 
         return {
             "statusCode": 201,
-            "event": json.dumps(obj, indent=4)
+            "event": obj
         }
 
 
