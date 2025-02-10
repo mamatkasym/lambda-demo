@@ -29,9 +29,9 @@ class ApiHandler(AbstractLambda):
         content = event.get("content")
 
         obj = {
-            "id": str(uuid.uuid4()),
+            "id": uuid.uuid4(),
             "principalId": principal_id,
-            "createdAt": str(datetime.datetime.now()),
+            "createdAt": datetime.datetime.now().isoformat(),
             "body": content
         }
 
