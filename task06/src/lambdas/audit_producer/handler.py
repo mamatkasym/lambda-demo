@@ -28,22 +28,22 @@ class AuditProducer(AbstractLambda):
         if method == "INSERT":
             obj = {
                        "id": uuid.uuid4().hex,
-                       "itemKey": new_image["key"],
+                       "itemKey": new_image["key"]["S"],
                        "modificationTime": datetime.datetime.now().isoformat(),
                        "newValue": {
-                           "key": new_image["key"],
-                           "value": new_image["value"],
+                           "key": new_image["key"]["S"],
+                           "value": new_image["value"]["N"],
                        },
                     }
         elif method == "MODIFY":
             old_image = record["dynamodb"]["OldImage"]
             obj = {
                        "id": uuid.uuid4().hex,
-                       "itemKey": new_image["key"],
+                       "itemKey": new_image["key"]["S"],
                        "modificationTime": datetime.datetime.now().isoformat(),
                        "updatedAttribute": "value",
-                       "oldValue": old_image["value"],
-                       "newValue": new_image["value"]
+                       "oldValue": old_image["value"]["N"],
+                       "newValue": new_image["value"]["N"]
                     }
 
         table.put_item(Item=obj)
