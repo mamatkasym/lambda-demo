@@ -32,7 +32,7 @@ class AuditProducer(AbstractLambda):
                        "modificationTime": datetime.datetime.now().isoformat(),
                        "newValue": {
                            "key": new_image["key"]["S"],
-                           "value": new_image["value"]["N"],
+                           "value": int(new_image["value"]["N"]),
                        },
                     }
         elif method == "MODIFY":
@@ -42,8 +42,8 @@ class AuditProducer(AbstractLambda):
                        "itemKey": new_image["key"]["S"],
                        "modificationTime": datetime.datetime.now().isoformat(),
                        "updatedAttribute": "value",
-                       "oldValue": old_image["value"]["N"],
-                       "newValue": new_image["value"]["N"]
+                       "oldValue": int(old_image["value"]["N"]),
+                       "newValue": int(new_image["value"]["N"])
                     }
 
         table.put_item(Item=obj)
