@@ -36,16 +36,15 @@ class ApiHandler(AbstractLambda):
         }
 
         dynamodb = boto3.resource('dynamodb', region_name=os.environ.get("region", "eu-central-1"))
-        table_names = sorted([table.name for table in list(dynamodb.tables.all()) if "cmtr-f88924dc-Events" in table.name], key=lambda z: len(z))
-        table_name = table_names[-1].replace("Table", "")
+        table_name = [table.name for table in list(dynamodb.tables.all()) if "Events" in table.name][0]
         _LOG.info(f"Table: {table_name}")
         table = dynamodb.Table(table_name)
 
-        response = table.put_item(Item=obj)
+        table.put_item(Item=obj)
 
         return {
             "statusCode": 201,
-            "event": obj
+            "event": json.dumps(obj, indent=4)
         }
 
 
