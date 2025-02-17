@@ -12,8 +12,6 @@ _LOG = get_logger(__name__)
 
 from aws_xray_sdk.core import xray_recorder
 
-patch(['boto3'])
-
 
 class Processor(AbstractLambda):
 
