@@ -10,6 +10,10 @@ from commons.abstract_lambda import AbstractLambda
 
 _LOG = get_logger(__name__)
 
+from aws_xray_sdk.core import xray_recorder
+
+patch(['boto3'])
+
 
 class Processor(AbstractLambda):
 
@@ -66,6 +70,6 @@ class Processor(AbstractLambda):
 
 HANDLER = Processor()
 
-
+@xray_recorder.capture("lambda_handler")
 def lambda_handler(event, context):
     return HANDLER.lambda_handler(event=event, context=context)
