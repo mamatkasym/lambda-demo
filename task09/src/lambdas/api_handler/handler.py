@@ -36,10 +36,8 @@ class ApiHandler(AbstractLambda):
 
         _LOG.info("Return 400 response")
         return {
-            "body": {
-                "statusCode": 400,
-                "message": f"Bad request syntax or unsupported method. Request path: {path}. HTTP method: {method}"
-            }
+            "statusCode": 400,
+            "message": f"Bad request syntax or unsupported method. Request path: {path}. HTTP method: {method}"
         }
 
 
