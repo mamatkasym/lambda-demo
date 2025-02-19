@@ -1,3 +1,5 @@
+import json
+
 from commons.log_helper import get_logger
 from commons.abstract_lambda import AbstractLambda
 
@@ -35,10 +37,10 @@ class ApiHandler(AbstractLambda):
             return response.json()
 
         _LOG.info("Return 400 response")
-        return {
+        return json.dumps({
             "statusCode": 400,
             "message": f"Bad request syntax or unsupported method. Request path: {path}. HTTP method: {method}"
-        }
+        })
 
 
 HANDLER = ApiHandler()
