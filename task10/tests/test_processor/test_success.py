@@ -1,7 +1,7 @@
-from tests.test_processor import ProcessorLambdaTestCase
+import unittest
 
 
-class TestSuccess(ProcessorLambdaTestCase):
+class TestSuccess(unittest.TestCase):
 
     def test_success(self):
         self.assertEqual(200, 200)

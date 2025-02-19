@@ -5,13 +5,13 @@ from decimal import Decimal
 
 import boto3
 import requests
+
+from aws_lambda_powertools import Tracer
 from commons.log_helper import get_logger
 from commons.abstract_lambda import AbstractLambda
 
 _LOG = get_logger(__name__)
-
-from aws_xray_sdk.core import xray_recorder
-
+tracer = Tracer()
 
 class Processor(AbstractLambda):
 
@@ -68,6 +68,6 @@ class Processor(AbstractLambda):
 
 HANDLER = Processor()
 
-@xray_recorder.capture("lambda_handler")
+@tracer.capture_method
 def lambda_handler(event, context):
     return HANDLER.lambda_handler(event=event, context=context)
