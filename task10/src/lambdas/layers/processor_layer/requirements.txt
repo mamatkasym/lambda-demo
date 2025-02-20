@@ -1,3 +1,2 @@
 # list of requirements
 requests==2.31.0
-aws-xray-sdk==2.14.0
