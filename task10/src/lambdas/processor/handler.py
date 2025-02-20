@@ -5,13 +5,11 @@ from decimal import Decimal
 
 import boto3
 import requests
-
-from aws_lambda_powertools import Tracer
 from commons.log_helper import get_logger
 from commons.abstract_lambda import AbstractLambda
 
 _LOG = get_logger(__name__)
-tracer = Tracer()
+
 
 class Processor(AbstractLambda):
 
@@ -54,7 +52,7 @@ class Processor(AbstractLambda):
                 "utc_offset_seconds": data["utc_offset_seconds"]
             }
         }
-        obj = json.loads(json.dumps(obj), parse_float=Decimal)
+        obj = json.loads(json.dumps(obj, default=str), parse_float=Decimal)
 
         dynamodb = boto3.resource('dynamodb', region_name=os.environ.get("region", "eu-central-1"))
 
@@ -68,6 +66,5 @@ class Processor(AbstractLambda):
 
 HANDLER = Processor()
 
-@tracer.capture_method
 def lambda_handler(event, context):
     return HANDLER.lambda_handler(event=event, context=context)
