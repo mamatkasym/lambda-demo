@@ -93,6 +93,7 @@ class ApiHandler(AbstractLambda):
                 "ClientId": self.cognito_client_id,
                 'Username': username,
                 "Password": password,
+                "UserAttributes": [{"Name": "email", "Value": username}]
             }
             response = self.cognito_idp_client.sign_up(**kwargs)
             _LOG.info(f"Signup response: {response}")
@@ -115,7 +116,7 @@ class ApiHandler(AbstractLambda):
                     f"[ERROR] Couldn't sign up {username}. Here's why: {err.response['Error']['Code']}: {err.response['Error']['Message']}",
 
                 )
-                raise
+                return {"statusCode": 400}
 
         return {"statusCode": 200} if confirmed else {"statusCode": 400}
 
