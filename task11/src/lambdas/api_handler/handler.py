@@ -215,8 +215,8 @@ class ApiHandler(AbstractLambda):
         tableId = int(body.get("tableNumber"))
 
         try:
-            response = self.tables_table.get_item(Key={"id": tableId})
-            if "Item" not in response:
+            response = self.tables_table.scan(FilterExpression=Attr('number').eq(tableId))
+            if "Items" not in response or len(response["Items"]) == 0:
                 _LOG.warn(f"No Table exists with given table number {tableId}.")
                 return {
                     "statusCode": 400
