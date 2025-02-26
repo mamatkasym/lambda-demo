@@ -128,8 +128,8 @@ class ApiHandler(AbstractLambda):
             self.tables_table.put_item(Item=body)
 
             return {
-                "statusCode": 201,
-                "body": json.dumps({"id": body["id"]})
+                "statusCode": 200,
+                "body": json.dumps({"id": body["id"]}, default=float)
             }
         except Exception as e:
             _LOG.error(e)
