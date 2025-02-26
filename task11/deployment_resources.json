@@ -123,7 +123,7 @@
         },
         "GET": {
           "enable_proxy": true,
-          "authorization_type": "authorizer",
+          "authorization_type": "NONE",
           "integration_type": "lambda",
           "lambda_name": "api_handler",
           "api_key_required": false,
@@ -138,7 +138,7 @@
         "enable_cors": false,
         "GET": {
           "enable_proxy": true,
-          "authorization_type": "authorizer",
+          "authorization_type": "NONE",
           "integration_type": "lambda",
           "lambda_name": "api_handler",
           "api_key_required": false,
@@ -153,7 +153,7 @@
         "enable_cors": false,
         "POST": {
           "enable_proxy": true,
-          "authorization_type": "authorizer",
+          "authorization_type": "NONE",
           "integration_type": "lambda",
           "lambda_name": "api_handler",
           "api_key_required": false,
@@ -165,7 +165,7 @@
         },
         "GET": {
           "enable_proxy": true,
-          "authorization_type": "authorizer",
+          "authorization_type": "NONE",
           "integration_type": "lambda",
           "lambda_name": "api_handler",
           "api_key_required": false,
