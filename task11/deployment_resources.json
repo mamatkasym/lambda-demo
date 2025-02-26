@@ -12,9 +12,12 @@
             "dynamodb:PutItem",
             "dynamodb:Batch*",
             "dynamodb:DeleteItem",
+            "dynamodb:Scan",
             "ssm:PutParameter",
             "ssm:GetParameter",
-            "kms:Decrypt"
+            "kms:Decrypt",
+            "cognito-identity:*",
+            "cognito-idp:*"
           ],
           "Effect": "Allow",
           "Resource": "*"
@@ -37,20 +40,49 @@
     "auto_verified_attributes": [],
     "sms_configuration": {},
     "username_attributes": [],
-    "custom_attributes": [],
-    "client": {},
+    "custom_attributes": [
+      {
+        "name": "firstName",
+        "type": "String"
+      },
+      {
+        "name": "lastName",
+        "type": "String"
+      },
+      {
+        "name": "email",
+        "type": "String"
+      }
+    ],
+    "client": {
+      "client_name": "client-app",
+      "generate_secret": false,
+      "explicit_auth_flows": [
+        "ALLOW_ADMIN_USER_PASSWORD_AUTH",
+        "ALLOW_REFRESH_TOKEN_AUTH"
+      ]
+    },
     "tags": {}
   },
   "task11_api": {
     "resource_type": "api_gateway",
     "deploy_stage": "api",
     "dependencies": [],
+    "authorizers": {
+      "authorizer": {
+        "type": "TOKEN",
+        "identity_source": "method.request.header.Authorization",
+        "lambda_name": "authorizer_handler",
+        "ttl": 300
+      }
+    },
     "resources": {
       "/signup": {
         "enable_cors": false,
         "POST": {
+          "enable_proxy": true,
           "authorization_type": "NONE",
-          "integration_type": "http",
+          "integration_type": "lambda",
           "lambda_name": "api_handler",
           "api_key_required": false,
           "method_request_parameters": {},
@@ -63,8 +95,10 @@
       "/signin": {
         "enable_cors": false,
         "POST": {
+          "enable_proxy": true,
           "authorization_type": "NONE",
-          "integration_type": "mock",
+          "integration_type": "lambda",
+          "lambda_name": "api_handler",
           "api_key_required": false,
           "method_request_parameters": {},
           "integration_request_body_template": {},
@@ -76,8 +110,10 @@
       "/tables": {
         "enable_cors": false,
         "POST": {
-          "authorization_type": "NONE",
-          "integration_type": "mock",
+          "enable_proxy": true,
+          "authorization_type": "authorizer",
+          "integration_type": "lambda",
+          "lambda_name": "api_handler",
           "api_key_required": false,
           "method_request_parameters": {},
           "integration_request_body_template": {},
@@ -86,8 +122,10 @@
           "default_error_pattern": true
         },
         "GET": {
-          "authorization_type": "NONE",
-          "integration_type": "mock",
+          "enable_proxy": true,
+          "authorization_type": "authorizer",
+          "integration_type": "lambda",
+          "lambda_name": "api_handler",
           "api_key_required": false,
           "method_request_parameters": {},
           "integration_request_body_template": {},
@@ -96,14 +134,28 @@
           "default_error_pattern": true
         }
       },
-      "/rservations": {
-        "enable_cors": false
+      "/tables/{tableId}": {
+        "enable_cors": false,
+        "GET": {
+          "enable_proxy": true,
+          "authorization_type": "authorizer",
+          "integration_type": "lambda",
+          "lambda_name": "api_handler",
+          "api_key_required": false,
+          "method_request_parameters": {},
+          "integration_request_body_template": {},
+          "responses": [],
+          "integration_responses": [],
+          "default_error_pattern": true
+        }
       },
       "/reservations": {
         "enable_cors": false,
         "POST": {
-          "authorization_type": "NONE",
-          "integration_type": "mock",
+          "enable_proxy": true,
+          "authorization_type": "authorizer",
+          "integration_type": "lambda",
+          "lambda_name": "api_handler",
           "api_key_required": false,
           "method_request_parameters": {},
           "integration_request_body_template": {},
@@ -112,8 +164,10 @@
           "default_error_pattern": true
         },
         "GET": {
-          "authorization_type": "NONE",
-          "integration_type": "mock",
+          "enable_proxy": true,
+          "authorization_type": "authorizer",
+          "integration_type": "lambda",
+          "lambda_name": "api_handler",
           "api_key_required": false,
           "method_request_parameters": {},
           "integration_request_body_template": {},
@@ -128,7 +182,7 @@
   "Tables": {
     "resource_type": "dynamodb_table",
     "hash_key_name": "id",
-    "hash_key_type": "S",
+    "hash_key_type": "N",
     "read_capacity": 1,
     "write_capacity": 1,
     "global_indexes": [],
