@@ -4,6 +4,7 @@ import uuid
 from decimal import Decimal
 
 import boto3
+from boto3.dynamodb.conditions import Attr
 from botocore.exceptions import ClientError
 from commons.log_helper import get_logger
 from commons.abstract_lambda import AbstractLambda
@@ -216,12 +217,14 @@ class ApiHandler(AbstractLambda):
         try:
             response = self.tables_table.get_item(Key={"id": tableId})
             if "Item" not in response:
+                _LOG.warn("No Table exists with given table number.")
                 return {
                     "statusCode": 400
                 }
 
-            response = self.reservations_table.get_item(Key={"id": reservation_id})
-            if "Item" in response:
+            response = self.reservations_table.scan(FilterExpression=Attr('tableNumber').eq(tableId))
+            if "Items" in response and len(response["Items"]) > 0:
+                _LOG.warn("Reservation already exists for given table number.")
                 return {
                     "statusCode": 400
                 }
