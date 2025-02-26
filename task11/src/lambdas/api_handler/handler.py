@@ -211,8 +211,21 @@ class ApiHandler(AbstractLambda):
         body: dict = json.loads(event.get("body"))
         body.update({"id": uuid.uuid4().hex})
         reservation_id = body["id"]
+        tableId = body.get("tableNumber")
 
         try:
+            response = self.tables_table.get_item(Key={"id": tableId})
+            if "Item" not in response:
+                return {
+                    "statusCode": 400
+                }
+
+            response = self.reservations_table.get_item(Key={"id": reservation_id})
+            if "Item" in response:
+                return {
+                    "statusCode": 400
+                }
+
             self.reservations_table.put_item(Item=body)
             _LOG.info("Reservation is created successfully...")
 
@@ -221,7 +234,7 @@ class ApiHandler(AbstractLambda):
                 "body": json.dumps({"reservationId": reservation_id})
             }
 
-        except Exception as e:
+        except ClientError as e:
             _LOG.error(e)
             return {
                 "statusCode": 400
@@ -245,7 +258,7 @@ class ApiHandler(AbstractLambda):
         else:
             return {
                 "statusCode": 200,
-                "body": json.dumps(response["Item"])
+                "body": json.dumps(response["Item"], default=float)
             }
     def handle_request(self, event, context):
         """
