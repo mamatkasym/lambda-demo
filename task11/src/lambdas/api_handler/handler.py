@@ -212,12 +212,12 @@ class ApiHandler(AbstractLambda):
         body: dict = json.loads(event.get("body"))
         body.update({"id": uuid.uuid4().hex})
         reservation_id = body["id"]
-        tableId = body.get("tableNumber")
+        tableId = int(body.get("tableNumber"))
 
         try:
             response = self.tables_table.get_item(Key={"id": tableId})
             if "Item" not in response:
-                _LOG.warn("No Table exists with given table number.")
+                _LOG.warn(f"No Table exists with given table number {tableId}.")
                 return {
                     "statusCode": 400
                 }
