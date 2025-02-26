@@ -108,7 +108,7 @@
         }
       },
       "/tables": {
-        "enable_cors": false,
+        "enable_cors": true,
         "POST": {
           "enable_proxy": true,
           "authorization_type": "authorizer",
