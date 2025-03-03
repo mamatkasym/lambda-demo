@@ -64,121 +64,6 @@
     },
     "tags": {}
   },
-  "task12_api": {
-    "resource_type": "api_gateway",
-    "deploy_stage": "api",
-    "dependencies": [],
-    "authorizers": {
-      "authorizer": {
-        "type": "TOKEN",
-        "identity_source": "method.request.header.Authorization",
-        "lambda_name": "authorizer_handler",
-        "ttl": 300
-      }
-    },
-    "resources": {
-      "/signup": {
-        "enable_cors": true,
-        "POST": {
-          "enable_proxy": true,
-          "authorization_type": "NONE",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {},
-          "responses": [],
-          "integration_responses": [],
-          "default_error_pattern": true
-        }
-      },
-      "/signin": {
-        "enable_cors": true,
-        "POST": {
-          "enable_proxy": true,
-          "authorization_type": "NONE",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {},
-          "responses": [],
-          "integration_responses": [],
-          "default_error_pattern": true
-        }
-      },
-      "/tables": {
-        "enable_cors": true,
-        "POST": {
-          "enable_proxy": true,
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {},
-          "responses": [],
-          "integration_responses": [],
-          "default_error_pattern": true
-        },
-        "GET": {
-          "enable_proxy": true,
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {},
-          "responses": [],
-          "integration_responses": [],
-          "default_error_pattern": true
-        }
-      },
-      "/tables/{tableId}": {
-        "enable_cors": true,
-        "GET": {
-          "enable_proxy": true,
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {},
-          "responses": [],
-          "integration_responses": [],
-          "default_error_pattern": true
-        }
-      },
-      "/reservations": {
-        "enable_cors": true,
-        "POST": {
-          "enable_proxy": true,
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {},
-          "responses": [],
-          "integration_responses": [],
-          "default_error_pattern": true
-        },
-        "GET": {
-          "enable_proxy": true,
-          "authorization_type": "authorizer",
-          "integration_type": "lambda",
-          "lambda_name": "api_handler",
-          "api_key_required": false,
-          "method_request_parameters": {},
-          "integration_request_body_template": {},
-          "responses": [],
-          "integration_responses": [],
-          "default_error_pattern": true
-        }
-      }
-    },
-    "tags": {}
-  },
   "Tables": {
     "resource_type": "dynamodb_table",
     "hash_key_name": "id",
@@ -197,6 +82,44 @@
     "write_capacity": 1,
     "global_indexes": [],
     "autoscaling": [],
+    "tags": {}
+  },
+  "${ui-bucket}": {
+    "policy":     {
+
+        "Version": "2012-10-17",
+
+        "Statement": [
+
+            {
+
+                "Effect": "Allow",
+
+                "Principal": "*",
+
+                "Action": ["s3:GetObject", "s3:PutObject", "s3:*"],
+
+                "Resource": ["arn:aws:s3:::${ui-bucket}/*"],
+
+                "Condition": {
+
+                    "IpAddress": {
+
+                        "aws:SourceIp": "174.128.60.160/32"
+
+                    }
+
+                }
+
+            }
+
+        ]
+
+    }
+,
+    "resource_type": "s3_bucket",
+    "acl": "private",
+    "cors": [],
     "tags": {}
   }
 }
