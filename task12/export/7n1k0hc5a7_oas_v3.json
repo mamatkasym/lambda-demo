@@ -17,6 +17,11 @@
   "paths": {
     "/reservations": {
       "get": {
+        "summary": "The method summary here",
+        "description": "The method description here",
+        "requestBody": {
+          "key": "value"
+        },
         "responses": {
           "200": {
             "description": "200 response",
@@ -57,6 +62,11 @@
         }
       },
       "post": {
+        "summary": "The method summary here",
+        "description": "The method description here",
+        "requestBody": {
+          "key": "value"
+        },
         "responses": {
           "200": {
             "description": "200 response",
@@ -147,6 +157,11 @@
     },
     "/tables": {
       "get": {
+        "summary": "The method summary here",
+        "description": "The method description here",
+        "requestBody": {
+          "key": "value"
+        },
         "responses": {
           "200": {
             "description": "200 response",
@@ -187,6 +202,11 @@
         }
       },
       "post": {
+        "summary": "The method summary here",
+        "description": "The method description here",
+        "requestBody": {
+          "key": "value"
+        },
         "responses": {
           "200": {
             "description": "200 response",
@@ -276,6 +296,11 @@
       }
     },
     "/signin": {
+      "summary": "The method summary here",
+      "description": "The method description here",
+      "requestBody": {
+        "key": "value"
+      },
       "post": {
         "responses": {
           "200": {
@@ -372,6 +397,8 @@
             }
           }
         ],
+        "summary": "The method summary here",
+        "description": "The method description here",
         "responses": {
           "200": {
             "description": "200 response",
@@ -471,6 +498,11 @@
       }
     },
     "/signup": {
+      "summary": "The method summary here",
+      "description": "The method description here",
+      "requestBody": {
+        "key": "value"
+      },
       "post": {
         "responses": {
           "200": {
