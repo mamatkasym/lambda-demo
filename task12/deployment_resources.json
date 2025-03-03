@@ -84,7 +84,7 @@
     "autoscaling": [],
     "tags": {}
   },
-  "${ui-bucket}": {
+  "api-ui-hoster": {
     "policy":     {
 
         "Version": "2012-10-17",
@@ -99,7 +99,7 @@
 
                 "Action": ["s3:GetObject", "s3:PutObject", "s3:*"],
 
-                "Resource": ["arn:aws:s3:::${ui-bucket}/*"],
+                "Resource": ["arn:aws:s3:::api-ui-hoster/*"],
 
                 "Condition": {
 
