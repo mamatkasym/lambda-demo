@@ -1,0 +1,33 @@
+# Define the structure of your API with the GraphQL
+# schema definition language (SDL) here.
+
+type Query {
+	test: String
+}
+
+schema {
+	query: Query
+}
+
+enum ItemType {
+    USER
+    DEVICE
+    EVENT
+}
+
+type Item {
+    id: ID!
+    sk: ItemType!
+}
+
+type Mutation {
+    createUser(Item): Item
+    createDevice(Item): Item
+    createEvent(Item): Item
+}
+
+type Query {
+    getUser(id: String!, sk: String!): Item
+    getDevice(id: String!, sk: String!): Item
+
+}
