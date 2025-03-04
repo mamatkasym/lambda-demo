@@ -13,7 +13,6 @@
                     "version": "2018-05-29",
                     "operation": "PutItem",
                     "key": {
-                        "id": $util.dynamodb.toDynamoDBJson($ctx.args.input.id),
-                        "sk": $util.dynamodb.toDynamoDBJson($ctx.args.input.sk),
+                        "id": $util.dynamodb.toDynamoDBJson($ctx.args.input.id)
                     }
                 }

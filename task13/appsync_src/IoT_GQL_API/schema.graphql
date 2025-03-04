@@ -9,12 +9,10 @@ enum ItemType {
 
 type Item {
     id: ID!
-    sk: ItemType!
 }
 
 input ItemInput {
     id: ID!
-    sk: ItemType!
 }
 
 type Mutation {
@@ -24,6 +22,6 @@ type Mutation {
 }
 
 type Query {
-    getUser(id: String!, sk: String!): Item
-    getDevice(id: String!, sk: String!): Item
+    getUser(id: String!): Item
+    getDevice(id: String!): Item
 }
