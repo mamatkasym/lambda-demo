@@ -16,8 +16,6 @@
   ],
   "paths": {
     "/reservations": {
-      "summary": "Reservations",
-      "description": "Reservations",
       "get": {
         "responses": {
           "200": {
@@ -54,8 +52,6 @@
         }
       },
       "post": {
-        "summary": "Reservations",
-        "description": "Reservations",
         "responses": {
           "200": {
             "description": "200 response",
@@ -91,8 +87,6 @@
         }
       },
       "options": {
-        "summary": "Reservations",
-        "description": "Reservations",
         "responses": {
           "200": {
             "description": "200 response",
@@ -143,8 +137,6 @@
     },
     "/tables": {
       "get": {
-        "summary": "Tables",
-        "description": "Tables",
         "responses": {
           "200": {
             "description": "200 response",
@@ -180,8 +172,6 @@
         }
       },
       "post": {
-        "summary": "Tables",
-        "description": "Tables",
         "responses": {
           "200": {
             "description": "200 response",
@@ -217,8 +207,6 @@
         }
       },
       "options": {
-        "summary": "Tables",
-        "description": "Tables",
         "responses": {
           "200": {
             "description": "200 response",
@@ -269,8 +257,6 @@
     },
     "/signin": {
       "post": {
-        "summary": "Summary",
-        "description": "Description",
         "responses": {
           "200": {
             "description": "200 response",
@@ -306,8 +292,6 @@
         }
       },
       "options": {
-        "summary": "Summary",
-        "description": "Description",
         "responses": {
           "200": {
             "description": "200 response",
@@ -358,8 +342,6 @@
     },
     "/signup": {
       "post": {
-        "summary": "Sign Up",
-        "description": "Sign Up",
         "responses": {
           "200": {
             "description": "200 response",
@@ -395,8 +377,6 @@
         }
       },
       "options": {
-        "summary": "Sign Up",
-        "description": "Sign Up",
         "responses": {
           "200": {
             "description": "200 response",
@@ -494,8 +474,6 @@
         }
       },
       "options": {
-        "summary": "Tables",
-        "description": "Tables",
         "parameters": [
           {
             "name": "tableId",
