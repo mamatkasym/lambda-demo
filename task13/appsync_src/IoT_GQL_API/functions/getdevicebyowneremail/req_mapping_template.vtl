@@ -1,0 +1,16 @@
+#set($items = $ctx.prev.result.items)
+
+#if($items.size() == 0)
+    $util.error("User not found. Device cannot be created without a valid user.", "UserNotFoundError")
+#end
+
+{
+    "version": "2018-05-29",
+    "operation": "Scan",
+    "filter": {
+        "expression": "owner_email = :owner_email",
+        "expressionValues": {
+            ":owner_email": $util.dynamodb.toStringJson($ctx.args.input.owner_email)
+        }
+    }
+}

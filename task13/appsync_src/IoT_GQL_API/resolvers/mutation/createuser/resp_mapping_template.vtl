@@ -1,3 +1,10 @@
-## Pass back the result from DynamoDB. **
-                $util.toJson($ctx.result)
-                
+## Response mapping template for handling the result of the PutItem operation
+#if($ctx.error)
+    #set($error = $ctx.error)
+    #if($error.errorType == "ConditionalCheckFailedException")
+        $util.error("User with this email already exists. Please try another.", "UserAlreadyExistsError")
+    #else
+        $util.error($error.message, $error.errorType)
+    #end
+#else
+    $util.toJson($ctx.result)

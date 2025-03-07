@@ -38,6 +38,7 @@
             "dynamodb:PutItem",
             "dynamodb:Batch*",
             "dynamodb:DeleteItem",
+            "dynamodb:*",
             "ssm:PutParameter",
             "ssm:GetParameter",
             "kms:Decrypt"
@@ -55,6 +56,8 @@
     "resource_type": "dynamodb_table",
     "hash_key_name": "id",
     "hash_key_type": "S",
+    "sort_key_name": "sk",
+    "sort_key_type": "S",
     "read_capacity": 1,
     "write_capacity": 1,
     "global_indexes": [],

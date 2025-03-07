@@ -1,0 +1,34 @@
+#set($items = $ctx.prev.result.items)
+
+#if($items.size() == 0)
+    $util.error("Device not found. Event cannot be created without a valid device.", "DeviceNotFoundError")
+#end
+
+#set($state = $ctx.args.input.state)
+
+#if ($state == "PENDING" || $state == "OK" || $state == "ALARM")
+    $state
+#else
+    $util.error("Invalid input for event state. Allowed states '[PENDING, OK, ALARM]'.", "InvalidEventStateError")
+#end
+
+{
+    "version": "2018-05-29",
+    "operation": "PutItem",
+    "key": {
+        "id": $util.dynamodb.toDynamoDBJson($util.autoId()),
+        "sk": $util.dynamodb.toDynamoDBJson("EVENT"),
+    },
+    "attributeValues": {
+        "device_owner_email": $util.dynamodb.toDynamoDBJson($ctx.args.input.device_owner_email),
+        "device_name": $util.dynamodb.toDynamoDBJson($ctx.args.input.device_name),
+        "device_type": $util.dynamodb.toDynamoDBJson($ctx.args.input.device_type),
+        "meta": {
+            "message": $util.dynamodb.toDynamoDBJson($ctx.args.input.meta.message),
+            "severity": $util.dynamodb.toDynamoDBJson($ctx.args.input.meta.severity),
+        }
+        "state": $util.dynamodb.toDynamoDBJson($state),
+    }
+}
+
+                

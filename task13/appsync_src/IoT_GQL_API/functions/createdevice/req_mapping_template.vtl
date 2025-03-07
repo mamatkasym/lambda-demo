@@ -1,0 +1,30 @@
+## Check the result of the previous DynamoDB scan operation
+
+#if($ctx.prev.error)
+    $util.error($ctx.prev.error.message, $ctx.prev.error.type)
+#end
+
+#set($items = $ctx.prev.result.items)
+
+#if($items.size() > 0)
+    $util.error("The device for the user with this email already exists.", "DeviceAlreadyExistsError")
+#end
+
+
+{
+    "version": "2018-05-29",
+    "operation": "PutItem",
+    "key": {
+        "id": $util.dynamodb.toDynamoDBJson($util.autoId()),
+        "sk": $util.dynamodb.toDynamoDBJson("DEVICE")
+    },
+    "attributeValues": {
+        "owner_email": $util.dynamodb.toDynamoDBJson($ctx.args.input.owner_email),
+        "name": $util.dynamodb.toDynamoDBJson($ctx.args.input.device_name),
+        "device_type": $util.dynamodb.toDynamoDBJson($ctx.args.input.device_type),
+        "description": $util.dynamodb.toDynamoDBJson($ctx.args.input.description),
+    }
+}
+
+
+                

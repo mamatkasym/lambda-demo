@@ -1,0 +1,13 @@
+
+{
+    "version": "2018-05-29",
+    "operation": "Scan",
+    "filter": {
+        "expression": "owner_email = :owner_email and name: = :device_name and device_type = :device_type",
+        "expressionValues": {
+            ":owner_email": $util.dynamodb.toStringJson($ctx.args.input.device_owner_email),
+            ":device_name": $util.dynamodb.toStringJson($ctx.args.input.device_name),
+            ":device_type": $util.dynamodb.toStringJson($ctx.args.input.device_type)
+        }
+    }
+}

@@ -15,13 +15,92 @@ input ItemInput {
     id: ID!
 }
 
+input CreateUserInput {
+    email: AWSEmail!
+    name: String!
+}
+
+input CreateDeviceInput {
+    owner_email: AWSEmail!
+    device_name: String
+    device_type: String
+    description: String
+}
+
+enum EventState {
+    PENDING
+    OK
+    ALARM
+}
+
+input EventMetaInput {
+    severity: String
+    message: String
+}
+input CreateEventInput {
+    device_owner_email: AWSEmail
+    device_name: String
+    device_type: String
+    state: EventState
+    meta: EventMetaInput
+}
+
+type User {
+    id: ID!
+    email: AWSEmail
+    name: String
+}
+
+type Device {
+    id: ID!
+    name: String
+    device_type: String
+    description: String
+}
+
+type EventMeta {
+    severity: String
+    message: String
+}
+type Event {
+    id: ID!
+    state: EventState
+    meta: EventMeta
+}
+
 type Mutation {
-    createUser(input: ItemInput): Item
-    createDevice(input: ItemInput): Item
-    createEvent(input: ItemInput): Item
+    createUser(input: CreateUserInput!): User
+    createDevice(input: CreateDeviceInput!): Device
+    createEvent(input: CreateEventInput!): Event
+}
+
+
+type Meta {
+    createdAt: String
+    severity: String
+    message: String
+}
+type GetEvent {
+    id: ID
+    state: EventState
+    meta: Meta
+}
+
+type GetUserResponse {
+    email: AWSEmail
+    id: ID
+    name: String
+    devices: [Device]
+}
+type GetDeviceResponse {
+    id: ID
+    description: String
+    name: String
+    device_type: String
+    events: [GetEvent]
 }
 
 type Query {
-    getUser(id: String!): Item
-    getDevice(id: String!): Item
+    getUser(email: AWSEmail!): GetUserResponse
+    getDevice(device_name: String!, device_type: String!, owner_email: AWSEmail!): GetDeviceResponse
 }
