@@ -64,16 +64,40 @@ class ApiHandler(AbstractLambda):
             _LOG.info(
                 f"[ERROR] Couldn't start sign in for {username}. Here's why: {err.response['Error']['Code']}: {err.response['Error']['Message']}"
             )
-            return {"statusCode": 400}
+            return {"statusCode": 400,
+                    "headers": {
+                        'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': '*',
+                        'Accept-Version': '*'
+                    },
+                    }
         except Exception as e:
             _LOG.info("[EXCEPTION] {e}")
-            return {"statusCode": 400}
+            return {
+                "statusCode": 400,
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
+            }
         else:
 
             access_token = response["AuthenticationResult"]["IdToken"]
             _LOG.info(f"Access Token: {access_token}")
 
-            return {"statusCode": 200, "body": json.dumps({"accessToken": access_token})}
+            return {
+                "statusCode": 200,
+                "body": json.dumps({"accessToken": access_token}),
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
+            }
 
     def signup(self, event):
         # Access user attributes from the event payload
@@ -119,7 +143,17 @@ class ApiHandler(AbstractLambda):
                 )
                 return {"statusCode": 400}
 
-        return {"statusCode": 200} if confirmed else {"statusCode": 400}
+        return {"statusCode": 200, "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },} if confirmed else {"statusCode": 400, "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },}
 
     def create_table(self, event: dict):
 
@@ -130,12 +164,24 @@ class ApiHandler(AbstractLambda):
 
             return {
                 "statusCode": 200,
-                "body": json.dumps({"id": body["id"]}, default=float)
+                "body": json.dumps({"id": body["id"]}, default=float),
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
         except Exception as e:
             _LOG.error(e)
             return {
-                "statusCode": 400
+                "statusCode": 400,
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
 
     def list_tables(self):
@@ -161,18 +207,36 @@ class ApiHandler(AbstractLambda):
                 f"[ERROR] Couldn't scan for movies. Here's why: {err.response['Error']['Code']}: {err.response['Error']['Message']}",
             )
             return {
-                "statusCode": 400
+                "statusCode": 400,
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
         except Exception as e:
             _LOG.info(f"[EXCEPTION] {e}")
 
             return {
-                "statusCode": 400
+                "statusCode": 400,
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
         else:
             return {
                 "statusCode": 200,
-                "body": json.dumps({"tables": tables}, default=float)
+                "body": json.dumps({"tables": tables}, default=float),
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
 
     def list_reservations(self):
@@ -195,17 +259,35 @@ class ApiHandler(AbstractLambda):
                 f'[ERROR] Could not scan. Here is why: {err.response["Error"]["Code"]}: {err.response["Error"]["Message"]}',
             )
             return {
-                "statusCode": 400
+                "statusCode": 400,
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
         except Exception as e:
             _LOG.info(f"[EXCEPTION] {e}")
             return {
-                "statusCode": 400
+                "statusCode": 400,
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
         else:
             return {
                 "statusCode": 200,
-                "body": json.dumps({"reservations": reservations}, default=float)
+                "body": json.dumps({"reservations": reservations}, default=float),
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
 
     def create_reservation(self, event: dict):
@@ -219,14 +301,26 @@ class ApiHandler(AbstractLambda):
             if "Items" not in response or len(response["Items"]) == 0:
                 _LOG.warn(f"No Table exists with given table number {tableId}.")
                 return {
-                    "statusCode": 400
+                    "statusCode": 400,
+                    "headers": {
+                        'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': '*',
+                        'Accept-Version': '*'
+                    },
                 }
 
             response = self.reservations_table.scan(FilterExpression=Attr('tableNumber').eq(tableId))
             if "Items" in response and len(response["Items"]) > 0:
                 _LOG.warn("Reservation already exists for given table number.")
                 return {
-                    "statusCode": 400
+                    "statusCode": 400,
+                    "headers": {
+                        'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                        'Access-Control-Allow-Origin': '*',
+                        'Access-Control-Allow-Methods': '*',
+                        'Accept-Version': '*'
+                    },
                 }
 
             self.reservations_table.put_item(Item=body)
@@ -234,13 +328,25 @@ class ApiHandler(AbstractLambda):
 
             return {
                 "statusCode": 200,
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
                 "body": json.dumps({"reservationId": reservation_id})
             }
 
         except ClientError as e:
             _LOG.error(e)
             return {
-                "statusCode": 400
+                "statusCode": 400,
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
 
     def get_table(self, event):
@@ -256,12 +362,24 @@ class ApiHandler(AbstractLambda):
                 err.response["Error"]["Message"],
             )
             return {
-                "statusCode": 400
+                "statusCode": 400,
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
         else:
             return {
                 "statusCode": 200,
-                "body": json.dumps(response["Item"], default=float)
+                "body": json.dumps(response["Item"], default=float),
+                "headers": {
+                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Methods': '*',
+                    'Accept-Version': '*'
+                },
             }
     def handle_request(self, event, context):
         """
