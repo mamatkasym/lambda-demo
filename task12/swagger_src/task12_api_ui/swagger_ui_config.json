@@ -3,7 +3,7 @@
   "resource_type": "swagger_ui",
   "path_to_spec": "export/jitabub0ak_oas_v3.json",
   "target_bucket": "api-ui-hoster",
-      "dependencies": [
+  "dependencies": [
       {
         "resource_name": "api-ui-hoster",
         "resource_type": "s3_bucket"

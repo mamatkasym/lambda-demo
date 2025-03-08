@@ -104,7 +104,7 @@
           "Condition": {
             "IpAddress": {
               "aws:SourceIp": [
-                "174.128.60.160/32"
+                "XXX.XXX.XXX.XXX/32"
               ]
             }
           }
