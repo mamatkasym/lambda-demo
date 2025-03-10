@@ -56,6 +56,30 @@
       "post": {
         "description": "Signup",
         "summary": "Signup",
+        "requestBody": {
+          "email": {
+            "description": "email",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "password": {
+            "description": "password",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "200 response",
@@ -180,6 +204,19 @@
       "post": {
         "description": "Signup",
         "summary": "Signup",
+        "requestBody": {
+          "name": {
+            "description": "name",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "200 response",
@@ -267,6 +304,30 @@
       "post": {
         "description": "Signup",
         "summary": "Signup",
+        "requestBody": {
+          "email": {
+            "description": "email",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "password": {
+            "description": "password",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "200 response",
