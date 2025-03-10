@@ -17,6 +17,8 @@
   "paths": {
     "/reservations": {
       "get": {
+        "summary": "Reservations",
+        "description": "Reservations",
         "responses": {
           "200": {
             "description": "200 response",
@@ -52,6 +54,8 @@
         }
       },
       "post": {
+        "description": "Signup",
+        "summary": "Signup",
         "responses": {
           "200": {
             "description": "200 response",
@@ -137,6 +141,8 @@
     },
     "/tables": {
       "get": {
+        "description": "Signup",
+        "summary": "Signup",
         "responses": {
           "200": {
             "description": "200 response",
@@ -172,6 +178,8 @@
         }
       },
       "post": {
+        "description": "Signup",
+        "summary": "Signup",
         "responses": {
           "200": {
             "description": "200 response",
@@ -257,6 +265,8 @@
     },
     "/signin": {
       "post": {
+        "description": "Signup",
+        "summary": "Signup",
         "responses": {
           "200": {
             "description": "200 response",
@@ -342,6 +352,32 @@
     },
     "/signup": {
       "post": {
+        "description": "Signup",
+        "summary": "Signup",
+        "requestBody": {
+          "email": {
+            "description": "email",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "password": {
+            "description": "password",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "200 response",
