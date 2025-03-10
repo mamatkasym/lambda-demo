@@ -96,7 +96,7 @@
           "Effect": "Allow",
           "Principal": "*",
           "Action": [
-            "s3:GetObject"
+            "s3:*"
           ],
           "Resource": [
             "arn:aws:s3:::api-ui-hoster/*"
@@ -104,7 +104,7 @@
           "Condition": {
             "IpAddress": {
               "aws:SourceIp": [
-                "89.237.194.32/32"
+                "18.197.177.98/32"
               ]
             }
           }
